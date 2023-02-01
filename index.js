@@ -1,20 +1,30 @@
-const Uruguay = require('./TasasUruguay/Uruguay')
-const Chile = require('./TasasChile/Chile')
-const Oanda = require('./Oanda/Oanda')
+const Uruguay = require('./TasasUruguay/Uruguay');
+const Chile = require('./TasasChile/Chile');
+const Oanda = require('./Oanda/Oanda');
 const Peru = require('./TasasPeru/Peru');
-const Colombia = require('./TasaColombia/Colombia')
-const CostaRica = require('./TasasCostaRica/CostaRica')
+const Colombia = require('./TasaColombia/Colombia');
+const CostaRica = require('./TasasCostaRica/CostaRica');
+const Guatemala = require('./TasaGuatemala/Guatemala')
+const Honduras = require('./TasaHonduras/Honduras')
+const Excel = require('./ExcelScript/Excel')
+const moment = require('moment');
 
-/*First Test wirh Pupperteer in JavaScript and Copie the secong part in Oanda, so i want copie the principal input conver */
-console.log("Incio de Busqueda");
+let hoy = moment().format('dddd');
+console.log("Incio de Busqueda " + hoy );
 
+
+   Colombia.Colombia();
    CostaRica.BancoCostaRica();
-   Chile.llamada();
-   Uruguay.BancoUruguayUSD();
    Peru.BancoPeruEur();
    Peru.BancoPeruUSD();
+   Chile.BancoChile();
+   Uruguay.BancoUruguayUSD();
+   Guatemala.PageGuatemala();
+   Honduras.Honduras()
+   setTimeout(() => {
    Oanda.Oanda();
-   Colombia.Colombia();
-   
-
-   
+   }, 10000);
+   setTimeout(() => {
+   Excel.SaveExcel();
+   }, 70000);
+ 

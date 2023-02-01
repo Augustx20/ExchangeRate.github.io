@@ -1,90 +1,55 @@
 const puppeteer = require('puppeteer');
-const Numero = require('../Valores/valores')
 
-const BancoChileUSD = async () => {
-    
+const url = "https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx";
+const ChileArray =[];
+
+const BancoChile = async () => {
     /* Banco Chile  Usd*/
 
     const browser = await puppeteer.launch({heandless: false });
     const page = await browser.newPage();
-    await page.goto("https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx");
+    await page.goto(url);
     await page.setViewport({ width: 1920, height: 1080 });
-    await page.screenshot({path: '02-Banco Chile.png'});
 
     const grabParagraphBancoChileUsd = await page.evaluate(() =>{
-        const pgTag = document.querySelector("#lblValor1_3");
-        return pgTag.innerHTML;
+        const pgTag = document.querySelector("#lblValor1_3").innerHTML;
+        return pgTag;
     });
 
-    console.log("Banco Chile", grabParagraphBancoChileUsd);
-    await browser.close()
-    Numero.ArrayVar.push(grabParagraphBancoChileUsd)
+    // console.log("Banco Chile", grabParagraphBancoChileUsd);
 
-}
+    let EditComa = grabParagraphBancoChileUsd.replace(/,/g,'.')
+    let numero = Number(EditComa)
+    console.log("Banco Chile " + numero|| undefined );
 
-const BancoChileEUR = async () => {
+
+    ChileArray.push(numero);
 
 /* Banco Chile  Eur*/
-    const browser = await puppeteer.launch({heandless: false });
-    const page = await browser.newPage();
-    await page.goto("https://si3.bcentral.cl/Indicadoressiete/secure/Indicadoresdiarios.aspx");
+    await page.goto(url);
     await page.setViewport({ width: 1920, height: 1080 });
 
     const grabParagraphBancoChileEur= await page.evaluate(() =>{
-        const pgTag = document.querySelector("#lblValor1_5");
-        return pgTag.innerHTML;
+        const pgTag = document.querySelector("#lblValor1_5").innerHTML;
+        return pgTag;
     });
 
-    console.log("Banco Chile", grabParagraphBancoChileEur);
-    await browser.close()
-    Numero.ArrayVar.push(grabParagraphBancoChileEur)
-}
-
-const OandaChileUSD = async () => {
+    // console.log("Banco Chile", grabParagraphBancoChileEur);
     
-const browser = await puppeteer.launch({heandless: false });
-const page = await browser.newPage();
-await page.goto("https://www.oanda.com/currency-converter/es/?from=USD&to=CLP&amount=1");
-await page.setViewport({ width: 1200, height:750 });
-await page.screenshot({path: '13-Tasa USDCLP.png'});
 
-const grabParagraphUSDCLP= await page.evaluate(() =>{
-    const pgTag = document.querySelector("#cc-time-series-plot > div > div > div:nth-child(2) > div > table > tbody > tr:nth-child(2) > td:nth-child(3)");
-    return pgTag.innerHTML;
-})
-console.log("USD/CLP", grabParagraphUSDCLP);
-await browser.close()
-Numero.ArrayVar.push(grabParagraphUSDCLP)
-}
+    let EditComaa = grabParagraphBancoChileEur.replace(/,/g,'.')
+    let numeroo = Number(EditComaa)
+    console.log("Banco Chile " + numeroo|| undefined );
 
-/* EURCLP */
+    ChileArray.push(numeroo);
+    await browser.close()
 
-const OandaChileEUR = async () => {
-    const browser = await puppeteer.launch({heandless: false });
-    const page = await browser.newPage();
-    await page.goto("https://www.oanda.com/currency-converter/es/?from=EUR&to=CLP&amount=1");
-    page.setDefaultNavigationTimeout(25);
-    await page.setViewport({ width: 1200, height:750 });
-    await page.screenshot({path: '14-Tasa EURCLP.png'});
-
-    const grabParagraphEURCLP= await page.evaluate(() =>{
-    const pgTag = document.querySelector("#cc-time-series-plot > div > div > div:nth-child(2) > div > table > tbody > tr:nth-child(2) > td:nth-child(3)");
-    return pgTag.innerHTML;
-})
-console.log("EUR/CLP", grabParagraphEURCLP);
-
-await browser.close()
-Numero.ArrayVar.push(grabParagraphEURCLP)
+    // console.log(ChileArray);
 
 }
- 
-const llamada = async () =>{
-    BancoChileUSD(), 
-    BancoChileEUR(), 
-    OandaChileUSD(), 
-    OandaChileEUR()
- }
 
 module.exports = {
-   llamada,
+    BancoChile,
+    ChileArray
+    
 }

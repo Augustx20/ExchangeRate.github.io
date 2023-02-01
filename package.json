@@ -1,20 +1,18 @@
 {
   "dependencies": {
-    "excel4node": "^1.8.0",
-    "exceljs": "^4.3.0",
-    "install": "^0.13.0",
+    
     "moment": "^2.29.4",
-    "node": "^19.2.0",
     "node.js": "^0.0.1-security",
-    "puppeteer": "^19.4.0",
+    "pupeteer": "^0.0.1",
     "random-useragent": "^0.5.0",
     "xlsx": "^0.18.5"
   },
-  "name": "tasasversion",
+  "name": "tasas",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "index.js",
+    "dev": "index.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +25,8 @@
     "url": "https://github.com/Augustx20/Tasas/issues"
   },
   "homepage": "https://github.com/Augustx20/Tasas#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "puppeteer": "^19.5.0"
+  }
 }
